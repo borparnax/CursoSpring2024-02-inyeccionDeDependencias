@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Logs ###
+*.log
+spring.log
+
 ### STS ###
 .apt_generated
 .classpath
@@ -31,3 +35,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Compiled files ###
+*.class
+
+### Package Files ###
+*.jar
+*.war
+*.ear
