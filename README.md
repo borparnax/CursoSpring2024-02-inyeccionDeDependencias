@@ -1,55 +1,52 @@
-# CursoSpring2024-02-InyeccionDeDependencias 🚀
+# CursoSpring2024-01-ParametrosYRutas 🚀
 
 ### 📋 Descripción del Proyecto
-Este proyecto es parte de una práctica de clase sobre **inyección de dependencias** con Spring Boot. Desarrolla una API REST que permite listar productos y obtener detalles de un producto específico, y demuestra cómo utilizar distintas implementaciones de un repositorio de datos, desde listas predefinidas hasta archivos JSON. La **inyección de dependencias** facilita la modularidad y permite cambiar la fuente de datos sin alterar el controlador principal.
-
-La aplicación expone una API REST que permite listar productos y obtener información detallada de un producto específico. Los datos de los productos pueden ser obtenidos desde distintas fuentes como listas predefinidas o un archivo JSON. Esto se logra gracias a la **inyección de dependencias** y el uso de **anotaciones** como `@Repository`, `@Service` y `@Autowired` que permiten modularizar el código y facilitar la gestión de las diferentes implementaciones.
+Este proyecto es parte de una práctica de clase sobre **manejo de parámetros y rutas** con Spring Boot. En esta práctica se desarrollan varios controladores que permiten gestionar diferentes tipos de **parámetros** para endpoints REST, incluyendo variables de ruta (`@PathVariable`), parámetros de solicitud (`@RequestParam`) y valores desde archivos de configuración (`@Value`). Además, se muestra cómo integrar vistas con **Thymeleaf** y cómo redirigir o reenviar solicitudes.
 
 ### 🎯 Objetivo
-El objetivo principal de esta práctica es entender cómo funciona la **inyección de dependencias** en un proyecto de Spring Boot, para facilitar el mantenimiento y la extensibilidad del código. Mediante anotaciones como `@Autowired`, `@Repository`, y `@Service`, aprendemos a separar las responsabilidades y mejorar la flexibilidad de nuestra aplicación.
+El objetivo principal de esta práctica es aprender a manejar diferentes tipos de **parámetros** y rutas dentro de un proyecto Spring Boot. Además, se pretende entender cómo usar anotaciones como `@Controller`, `@RestController`, `@GetMapping`, y `@PostMapping` para desarrollar APIs REST y controladores de vistas.
 
 En esta práctica, aprenderás a:
 
-- Utilizar **Spring Boot** para crear controladores REST. 🌐
-- Entender cómo funciona la **inyección de dependencias** en Spring. 🤖
-- Trabajar con la anotación `@Primary` para definir prioridades entre diferentes implementaciones de repositorios. ⭐
-- Definir y configurar beans a través de la clase `AppConfig` y el uso de `@Configuration` y `@PropertySource`. 🛠️
+- Utilizar **Spring Boot** para crear controladores REST y controladores de vistas. 🌐
+- Entender cómo funcionan los **parámetros de rutas** (`@PathVariable`) y **parámetros de solicitud** (`@RequestParam`). 🛣️
+- Utilizar valores de configuración con **`@Value`** para personalizar la aplicación y su comportamiento. 🛠️
+- Redirigir (`redirect`) y reenviar (`forward`) peticiones HTTP en Spring. 🔄
 
 ### 🔍 Funcionalidades
-- **Listar productos**: `/api` devuelve una lista de todos los productos.
-- **Mostrar producto por ID**: `/api/{id}` devuelve los detalles de un producto específico.
+- **Redirección de peticiones**: La ruta `/home` redirige automáticamente al listado de usuarios (`/list`).
+- **Variables de ruta** (`@PathVariable`):
+  - Endpoint `/api/var/baz/{message}` devuelve un objeto con el mensaje recibido.
+  - Endpoint `/api/var/mix/{product}/{id}` devuelve un JSON con los valores `product` e `id` recibidos en la URL.
+- **Parámetros de solicitud** (`@RequestParam`):
+  - Endpoint `/api/params/foo` recibe un mensaje opcional, devolviendo un valor por defecto si no se proporciona.
+  - Endpoint `/api/params/bar` recibe dos parámetros y los devuelve en una respuesta estructurada.
+  - Endpoint `/api/params/request` maneja los parámetros desde el objeto `HttpServletRequest`.
+- **Manejo de usuarios**: Vista que muestra detalles de un usuario (`/details`) y un listado de usuarios (`/list`).
+- **Configuración de propiedades** (`@Value` y `Environment`): Acceso a valores definidos en el archivo `values.properties`.
 
 ### 🛠️ Tecnologías utilizadas
 - **Java 17**
 - **Spring Boot**
-- **Maven**
-- **Jackson** para manejo de JSON
+- **Thymeleaf** para la integración de vistas
+- **Maven** como herramienta de construcción 📦
+- **Jakarta Servlet** para manejar solicitudes HTTP 🚀
 
 ### ⚙️ Configuración
-El bean `productJson` carga los productos desde `resources/json/product.json`. También se aplica un impuesto (`config.price.tax`) especificado en `config.properties`.
+El proyecto utiliza un archivo de propiedades (`values.properties`) para almacenar valores de configuración como códigos, mensajes, listas y mapas de valores. Estos valores se inyectan en los controladores usando `@Value` y `Environment`, lo que facilita personalizar el comportamiento de la aplicación.
 
-Tambien, utilizamos una propiedad (`config.price.tax`) especificada en `config.properties` para aplicar impuestos a los precios de los productos antes de retornarlos al cliente. 💸
-
-#### Archivo `config.properties`:
+#### Archivo `values.properties`:
 ```
-config.price.tax=1.25d
+config.code=23232
+config.username=nacho
+config.message=Hola que tal como estás
+config.listOfValues=hola,que,tal,hoy
+config.valuesMap={product: 'Cpu Intel Core i7 12th', description: 'Alder Lake, 12 core, a 5 GHz', price: '1000'}
 ```
 
 ### 📂 Estructura del proyecto
-- `controllers` - Endpoints REST.
-- `models` - Clase `Product`.
-- `repositories` - Interfaces y sus implementaciones.
-- `services` - Lógica de negocio.
-- `AppConfig` - Configuración de beans.
+- `controllers` - Contiene los controladores de vistas y API REST para manejar diferentes endpoints.
+- `models` - Clases que representan el modelo de la aplicación (`User`, `ParamDto`, etc.).
+- `dto` - Clases de transferencia de datos para estructurar las respuestas de la API (`ParamDto`, `ParamMixDto`, `UserDto`).
 
-
-5. Verifica que el archivo `resources/json/product.json` esté presente. Aquí un ejemplo del contenido:
-   ```
-3. Ejecuta la aplicación usando Maven:
-   ```bash
-   ./mvnw spring-boot:run
-   ```
 
-4. Accede a los **endpoints** REST desde tu navegador o una herramienta como Postman:
-   - Listar productos: `http://localhost:8080/api`
-   - Obtener un producto específico por `id`: `http://localhost:8080/api/{id}`
