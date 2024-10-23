@@ -53,17 +53,3 @@ config.price.tax=1.25d
 4. Accede a los **endpoints** REST desde tu navegador o una herramienta como Postman:
    - Listar productos: `http://localhost:8080/api`
    - Obtener un producto específico por `id`: `http://localhost:8080/api/{id}`
-
-### 🚀 Próximos pasos
-- Implementar una base de datos en lugar de usar archivos JSON o listas en memoria.
-- Añadir endpoints adicionales, como crear, actualizar o eliminar productos.
-
----
-
-🚀 **Contribuye al proyecto**: Si te gusta este proyecto y quieres contribuir, ¡no dudes en hacer un **fork** y enviar tus **pull requests**! 💡
-
-📜 **Licencia**: Este proyecto está bajo la licencia [MIT](LICENSE).
-
-### 📝 Contacto
-🌐 [Tu Perfil de GitHub](https://github.com/borparnax)
-
